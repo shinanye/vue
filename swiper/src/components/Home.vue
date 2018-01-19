@@ -14,13 +14,15 @@
         <div class="swiper-pagination"  slot="pagination"></div>
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
-        <div class="swiper-scrollbar"   slot="scrollbar"></div>
+        <!-- <div class="swiper-scrollbar"   slot="scrollbar"></div> -->
     </swiper>
   </div>
 </template>
 
 <script>
 //vue的挂载
+import 'swiper/dist/css/swiper.css';
+import { swiper, swiperSlide } from 'vue-awesome-swiper';
 
 export default {
   name: 'Home',
@@ -28,35 +30,31 @@ export default {
     return {
       msg: 'Welcome to use swiper',
       swiperOption: {
-          // NotNextTick is a component's own property, and if notNextTick is set to true, the component will not instantiate the swiper through NextTick, which means you can get the swiper object the first time (if you need to use the get swiper object to do what Things, then this property must be true)
-          // notNextTick是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
-          notNextTick: true,
-          // swiper configs 所有的配置同swiper官方api配置
           autoplay: 3000,
           direction : 'horizontal',
-          grabCursor : true,
-          setWrapperSize :true,
-          autoHeight: true,
+          loop: true,
+          autoplay:true,
+          // 如果需要分页器
           pagination: {
             el: '.swiper-pagination',
-            clickable: true
           },
-          paginationClickable :true,
+          
+          // 如果需要前进后退按钮
           navigation: {
-                prevButton: '.swiper-button-next',
-                nextButton: '.swiper-button-prev',
-            },
-          scrollbar:'.swiper-scrollbar',
-          mousewheelControl : true,
-          observeParents:true,
-          // if you need use plugins in the swiper, you can config in here like this
-          // 如果自行设计了插件，那么插件的一些配置相关参数，也应该出现在这个对象中，如下debugger
-          debugger: true,
-          onTransitionStart(swiper){
-            console.log(swiper)
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+          
+          // 如果需要滚动条
+          scrollbar: {
+            el: '.swiper-scrollbar',
           },
         }
     }
+  },
+  components: {
+    swiper,
+    swiperSlide
   }
 }
 </script>
@@ -64,4 +62,11 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
+.swiper-container {
+    width: 600px;
+    height: 300px;
+}  
+.swiper-slide{
+  line-height: 300px;
+}
 </style>
